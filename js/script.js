@@ -6,16 +6,16 @@ var d = today.get("day");
 var h = today.get("hour");
 
 // Time variables
-var htmlLastHour = 17;
+var htmlHourArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 var htmlHour = 9;
 var htmlHourSuffix = "";
 
 // Displays current date and/or time in header
 $("#currentDay").text(today.toLocaleString(dateTime.DATE_HUGE));
 
-incrementHtmlHour();
+setHtmlHour();
 
-function incrementHtmlHour() {
+function setHtmlHour() {
 
     if (htmlHour >= 12) {
         htmlHourSuffix = "PM";
@@ -89,7 +89,6 @@ $("#submit").on("click", function (event) {
     window.location.reload();
 });
 
-
 // Get object from local storage
 var textStore = JSON.parse(localStorage.getItem("textStore")) || [];
 
@@ -102,14 +101,14 @@ $("#data-save").on("click", function (event) {
 
     // Validates the text field for text and alerts if none is present
     if ($(".text").val() == '') {
-        alert("Please enter text.")
+        alert("No text detected, Please enter text.")
         return;
     } else {
-        text = {
+        textEntered = {
             time: htmlTime,
             textInput: text
         };
-        textStore.push(text);
+        textStore.push(textEntered);
         localStorage.setItem("textStore", JSON.stringify(textStore));
     }
     getStoredText();
@@ -118,8 +117,11 @@ $("#data-save").on("click", function (event) {
 // Get and display textarea from local storage
 function getStoredText() {
 
+    var htmlTime = htmlHour + htmlHourSuffix;
 
-
+    console.log("Stored text: ", textStore);
+    
+    
 }
 
 
