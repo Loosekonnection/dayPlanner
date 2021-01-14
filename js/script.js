@@ -7,7 +7,7 @@ var h = today.get("hour");
 
 // Time variables
 var htmlLastHour = 17;
-var htmlHour = 12;
+var htmlHour = 9;
 var htmlHourSuffix = "";
 
 // Displays current date and/or time in header
@@ -45,6 +45,7 @@ function createTimeBlocks() {
     $("#scheduler").append($timeBlock);
 
     textAreaBGColour();
+    clearStorageButton();
 }
 
 // Set the textarea background colour relative to the time of day
@@ -62,7 +63,34 @@ function textAreaBGColour() {
     }
 }
 
-// Get text from local storage
+// Clear planner button
+function clearStorageButton() {
+
+    $clearDiv = $("<div>").addClass("row m-3");
+    $buttonDiv = $("<div>").addClass("col text-center");
+    $clearDiv.append($buttonDiv);
+
+    $($buttonDiv).append(
+        $(document.createElement('input')).prop({
+            type: 'button',
+            id: 'submit',
+            value: 'Clear Planner',
+            className: 'btn btn-secondary'
+        })
+    );
+    $("#scheduler").append($clearDiv);
+}
+
+// clear local storage & planner function
+$("#submit").on("click", function (event) {
+    event.preventDefault();
+
+    localStorage.clear();
+    window.location.reload();
+});
+
+
+// Get object from local storage
 var textStore = JSON.parse(localStorage.getItem("textStore")) || [];
 
 // Store text in local storage
@@ -84,9 +112,15 @@ $("#data-save").on("click", function (event) {
         textStore.push(text);
         localStorage.setItem("textStore", JSON.stringify(textStore));
     }
-    getTextStored();
+    getStoredText();
 });
 
+// Get and display textarea from local storage
+function getStoredText() {
+
+
+
+}
 
 
 
