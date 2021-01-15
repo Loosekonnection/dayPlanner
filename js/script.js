@@ -22,34 +22,32 @@ function textAreaBGColour() {
         htmlHoursArray.push(htmlHours);
     });
 
-    var currentHour = h.toString();
-
     console.log("Text Area Value: ", $("textarea").attr("value"));
-    console.log("Current Hour: ", currentHour);
     console.log("HTML Hours Array: ", htmlHoursArray);
 
     for (var i = 0; i < htmlHoursArray.length; i++) {
 
             // console.log(htmlHoursArray[i]);
 
-        if (currentHour === htmlHoursArray[i]) {
-            console.log("great its working");
-            $("textarea").addClass("present");
-
-        } else if (currentHour > htmlHoursArray[i]) {
-            
-
-        } else {
-            
-        }
+            if (parseInt(htmlHoursArray[i]) === h) {
+                $("textarea[value=" + htmlHoursArray[i] + "]").addClass("present");
+            } else if (parseInt(htmlHoursArray[i]) > h) {
+                $("textarea[value=" + htmlHoursArray[i] + "]").addClass("future");
+            } else {
+                $("textarea[value=" + htmlHoursArray[i] + "]").addClass("past");
+            }
     }
 }
 
 // Store text in local storage
-$(".fa-save").on("click", function (event) {
-    event.preventDefault();
+$(".fa-save").on("click", function () {
+    
+    // $(".text").each(function () {
+    //     var saveBtnVal = $(this).attr("value");
+    //     saveBtnValArray.push(saveBtnVal);
+    // });
 
-    var pageTime = $(".time-block").attr("value");
+    var pageTime = $(".fa-save").attr("value");
     var text = $(".text").val().trim();
 
     console.log("Page Time: ", pageTime);
@@ -78,11 +76,11 @@ function getStoredText() {
     var timeMatch = text.time;
     var textSave = text.textInput;
 
+    console.log
+
     if ($("textarea").attr("value") == timeMatch) {
         $("textarea").val(textSave);
-    } else {
-        return;
-    }
+    } 
 }
 
 // Clears local storage & planner function
@@ -93,5 +91,5 @@ $("#submit").on("click", function (event) {
     window.location.reload();
 });
 
-
+getStoredText();
 
