@@ -16,7 +16,7 @@ $("#currentDay").text(today.toLocaleString(dateTime.DATE_HUGE));
 createTimeBlocks();
 clearStorageButton();
 
-// Create time blocks html dynamically
+// Create time blocks html dynamically and set the time display with am or
 function createTimeBlocks() {
 
     var i = 0;
@@ -29,7 +29,6 @@ function createTimeBlocks() {
         }
 
         var htmlTime = htmlHourArray[i]+ htmlHourSuffix;
-
         // Time block div
         $timeBlock = $("<div>").addClass("row m-1");
         // First child div conatining the displayed time
@@ -70,11 +69,11 @@ function textAreaBGColour() {
     }
 }
 
-// Get object from local storage
+// Set Get object from local storage
 var textStore = JSON.parse(localStorage.getItem("textStore")) || [];
 
 // Store text in local storage
-$(".fa-save").on("click", "i", function (event) {
+$(".fa-save").on("click", function (event) {
     event.preventDefault();
 
     var pageTime = $(this).attr("value");
@@ -97,17 +96,16 @@ $(".fa-save").on("click", "i", function (event) {
 // Get and display textarea from local storage
 function getStoredText() {
 
-    var storedText = localStorage.getItem("timeBlockText");
+    var storedText = localStorage.getItem("textStore");
     var text = JSON.parse(storedText);
 
     var timeMatch = text.time;
     var textSave = text.textInput;
 
-    if ($(".time-block").text() == timeMatch) {
-        console.log("Woohoo! " + timeMatch);
+    if ($(".time-block").html() == timeMatch) {
         $(".text").text(textSave);
     } else {
-        $(".time-block").text();
+        $(".time-block").html();
     }
 }
 
@@ -130,11 +128,11 @@ function clearStorageButton() {
 }
 
 // clear local storage & planner function
-$("#submit").on("click", function () {
+$("#submit").on("click", function (event) {
+    event.preventDefault();
 
     localStorage.clear();
     window.location.reload();
 });
 
 getStoredText();
-
