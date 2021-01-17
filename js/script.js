@@ -87,6 +87,8 @@ $(".fa-save").on("click", function (event) {
    
 });
 
+// getItem from Local storage and persistantly display on the webpage until the clear Planner button is clicked
+// or the input is updated and saved with alternate text
 var storedKey9 = localStorage.getItem("9"); 
 $("#9").text(storedKey9);
 
