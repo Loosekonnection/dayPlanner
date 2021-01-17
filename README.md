@@ -1,5 +1,4 @@
 # Work Day Planer
-# Work Day Planner
 Work Day Hourly Scheduler 
 
 *   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/dayPlanner)
@@ -27,7 +26,7 @@ Work Day Hourly Scheduler
 *   The past time slot will need to change to grey, I will also add a strike through on the text.
 *   The future time slots will need to be green, I will use a black font colour for these slots.
 *   The save icon is a white font awsome save icon that will need to have a hover over that enlargens the icon and changes the colour to black.
-* With timeslots having data stored in local storage, I will add a 'Clear Planner' button to clear local storage for the next day's use.
+*   With timeslots having data stored in local storage, I will add a 'Clear Planner' button to clear local storage for the next day's use.
 *   A HTML and CSS file with classes has been provided, classes need mapping.
 ---
 
@@ -81,6 +80,3 @@ var htmlHourArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 ---
 © 2021 Loosekonnection, Working towards being a Full Stack Developer, and feeling challange!
-*   The current time slot needs be idenfied with an individual color.
-*   The past time slot will need to change to grey.
-*   The future time slots will need to be green.
