@@ -45,7 +45,7 @@ Work Day Hourly Scheduler
 
 *   To clear all events click the 'Clear Planner' button at the bottom of the page.
 
-*   If you daily work hour schedule is not 9am to 5pm, this can be changed by updating the ```var htmlHourArray``` within the ```script.js```.
+*   If your daily work hour schedule is not 9am to 5pm, this can be changed by updating the ```var htmlHourArray``` within the ```script.js```.
 
 *   Inputting any of the daily hours in a 24hr format will add / update the timeblock to the page respectively.
 
@@ -54,6 +54,18 @@ Work Day Hourly Scheduler
 ```
 var htmlHourArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 ```
+
+*   Currently the text input getItem is not dynamic and relies on hardcoding.
+
+*   If you add extra hours to the ```htmlHourArray```, you will need to create a ```getItem``` and update the DOM via jQuery within the ```script.js``` file starting at line 90. 
+
+*   example, change the number to suit the 24hr respectively.
+
+```
+var storedKey17 = localStorage.getItem("17");
+$("#17").text(storedKey17);
+```
+
 <br>
 
 ![alt](README_img/screenshot_01.PNG)
