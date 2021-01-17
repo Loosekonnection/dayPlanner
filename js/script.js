@@ -43,7 +43,7 @@ function createTimeBlocks() {
         var displayTime = $("<div>").addClass("time-block hour").text(htmlTime);
         var timeDiv = $("<div>").addClass("col-2 pr-0").append(displayTime);
         // Next child div named textarea for inputting text
-        var textBlock = $("<textarea>").addClass("col-9 text").text("").attr("value", htmlHourArray[i]);
+        var textBlock = $("<textarea>").addClass("col-9 text").text("").attr("id", htmlHourArray[i]);
         // Next child div, the save icon at the end of the time block
         var saveIcon = $("<i>").addClass("fas fa-save").attr("value", htmlHourArray[i]);
         var saveDiv = $("<div>").addClass("col-1 saveBtn").append(saveIcon);
@@ -60,24 +60,21 @@ function createTimeBlocks() {
 function textAreaBGColour() {
 
     $("textarea").each(function () {
-        var htmlHours = $(this).attr("value");
+        var htmlHours = $(this).attr("id");
         textValArray.push(htmlHours);
     });
 
     for (var i = 0; i < textValArray.length; i++) {
 
         if (parseInt(textValArray[i]) === h) {
-            $("textarea[value=" + textValArray[i] + "]").addClass("present");
+            $("textarea[id=" + textValArray[i] + "]").addClass("present");
         } else if (parseInt(textValArray[i]) > h) {
-            $("textarea[value=" + textValArray[i] + "]").addClass("future");
+            $("textarea[id=" + textValArray[i] + "]").addClass("future");
         } else {
-            $("textarea[value=" + textValArray[i] + "]").addClass("past");
+            $("textarea[id=" + textValArray[i] + "]").addClass("past");
         }
     }
 }
-
-// Set Get object from local storage
-// var textStore = localStorage.getItem(pageTime, text);
 
 // Store text in local storage
 $(".fa-save").on("click", function (event) {
@@ -91,42 +88,31 @@ $(".fa-save").on("click", function (event) {
 });
 
 var storedKey9 = localStorage.getItem("9"); 
-var textarea9 = document.getElementByClassName(".text").attr("9");
-// textarea9.textContent = storedKey9;
-// document.getElementByClass(".text").value = "storedKey9";
-// $("textarea").attr("9").text("storedKey9");
-// document.getElementsByTagName("textarea").value = storedKey9;
-// textarea = storedKey9;
-
-console.log(storedKey9);
-
-console.log(textarea9);
-
-
+$("#9").text(storedKey9);
 
 var storedKey10 = localStorage.getItem("10");
-console.log(storedKey10);
+$("#10").text(storedKey10);
 
 var storedKey11 = localStorage.getItem("11");
-console.log(storedKey11);
+$("#11").text(storedKey11);
 
 var storedKey12 = localStorage.getItem("12");
-console.log(storedKey12);
+$("#12").text(storedKey12);
 
 var storedKey13 = localStorage.getItem("13");
-console.log(storedKey13);
+$("#13").text(storedKey13);
 
 var storedKey14 = localStorage.getItem("14");
-console.log(storedKey14);
+$("#14").text(storedKey14);
 
 var storedKey15 = localStorage.getItem("15");
-console.log(storedKey15);
+$("#15").text(storedKey15);
 
 var storedKey16 = localStorage.getItem("16");
-console.log(storedKey16);
+$("#16").text(storedKey16);
 
 var storedKey17 = localStorage.getItem("17");
-console.log(storedKey17);
+$("#17").text(storedKey17);
 
 
 // Clear planner button
