@@ -75,47 +75,28 @@ function textAreaBGColour() {
     }
 }
 
-// Array for storing objects in local storage
-var textStore = JSON.parse(localStorage.getItem("textStore")) || [];
+// Set Get object from local storage
+// var textStore = localStorage.getItem(pageTime, text);
 
-// Store & read text in/from local storage
+// Store text in local storage
 $(".fa-save").on("click", function (event) {
     event.preventDefault();
 
     var pageTime = $(this).attr("value");
     var text = $(this).parent().prev("textarea").val();
-    var textareaVal = $(this).parent().prev("textarea").attr("value");
 
-    textEntered = {
-        "time": pageTime,
-        "textInput": text
-    };
-
-    textStore.push(textEntered);
-    localStorage.setItem("textStore", JSON.stringify(textStore));
-    
-    var storedText = localStorage.getItem("textStore");
-    var text = JSON.parse(storedText);
-
-    $.each(text, function(index, val) {
-        console.log("val.time: ", val.time);
-        console.log("val.textInput: ", val.textInput);
-
-        console.log("text index: ", index);
-
-        if (textareaVal == val.time) {
-
-            console.log("Yes");
-            $("textarea").val(val.textInput);
-            // $(this).parent().prev("textarea").val(val.textInput);
-            console.log($("textarea").attr(val.time));
-
-        } else {
-            console.log("nope!");
-        }
-    });   
-    
+    localStorage.setItem(pageTime, text);   
+   
 });
+
+var storedKey = localStorage.getItem("9");
+var textarea = $("<textarea>").attr("9");
+
+textarea = storedKey;
+$("<textarea>").val(textarea);
+
+console.log(textarea);
+
 
 // Clear planner button
 function clearStorageButton() {
@@ -143,44 +124,3 @@ $("#submit").on("click", function (event) {
     window.location.reload();
 });
 
-
-
-// // Store text in local storage
-// $(".fa-save").on("click", function (event) {
-//     event.preventDefault();
-
-//     var pageTime = $(this).attr("value");
-
-//     var timeText = $(this).parent().prev("textarea").val();
-
-//     textEnteredArr[pageTime] = timeText;
-//     localStorage.setItem("textStore", JSON.stringify(textEnteredArr));
-
-//     getStoredText();
-// });
-
-// // Get and display textarea from local storage
-// function getStoredText() {
-
-//     var textStore = JSON.parse(localStorage.getItem("textStore"));
-
-//     console.log(textStore);
-
-//     $(textStore).each(function (index) {
-
-//         console.log(textStore[index]);
-
-//         if (textStore[index] !== null) {
-
-//             $("textarea").attr("value", textStore[index]).val();
-//             // console.log("not null");
-
-//             // var time = $(this).attr("value");
-//             // var text = $(this).parent().prev("textarea").val();
-
-
-
-//         }
-
-//     });
-// }
