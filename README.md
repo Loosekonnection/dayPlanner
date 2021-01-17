@@ -1,4 +1,4 @@
-# Work Day Plannerer
+# Work Day Planner
 Work Day Hourly Scheduler 
 
 *   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/dayPlanner)
