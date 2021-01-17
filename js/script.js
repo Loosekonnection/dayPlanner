@@ -5,7 +5,7 @@ var m = today.get("month");
 var d = today.get("day");
 var h = today.get("hour");
 
-// Time variables
+// Global Variables
 var htmlHourArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 var textValArray = [];
 var htmlHourSuffix = "";
@@ -22,29 +22,35 @@ function createTimeBlocks() {
     var i = 0;
     while (i < htmlHourArray.length) {
 
+        // Appends the correct am or pm suffix respectively
         if (htmlHourArray[i] >= 12) {
             htmlHourSuffix = "pm";
         } else {
             htmlHourSuffix = "am";
         }
 
-        var htmlTime = htmlHourArray[i]+ htmlHourSuffix;
+        // Changes the 24hr format to 12hr format
+        if (htmlHourArray[i] > 12) {
+            var htmlTime = (htmlHourArray[i] - 12) + htmlHourSuffix;
+        } else {
+            var htmlTime = htmlHourArray[i] + htmlHourSuffix;
+        }
+
         // Time block div
-        $timeBlock = $("<div>").addClass("row m-1");
+        var timeBlock = $("<div>").addClass("row m-1");
         // First child div conatining the displayed time
-        $displayTime = $("<div>").addClass("time-block hour").text(htmlTime);
-        $timeDiv = $("<div>").addClass("col-2 pr-0").append($displayTime);
+        var displayTime = $("<div>").addClass("time-block hour").text(htmlTime);
+        var timeDiv = $("<div>").addClass("col-2 pr-0").append(displayTime);
         // Next child div named textarea for inputting text
-        $textBlock = $("<textarea>").addClass("col-9 text").text("").attr("value", htmlHourArray[i]);
+        var textBlock = $("<textarea>").addClass("col-9 text").text("").attr("value", htmlHourArray[i]);
         // Next child div, the save icon at the end of the time block
-        $saveIcon = $("<i>").addClass("fas fa-save").attr("value", htmlHourArray[i]);
-        $saveDiv = $("<div>").addClass("col-1 saveBtn").append($saveIcon);
+        var saveIcon = $("<i>").addClass("fas fa-save").attr("value", htmlHourArray[i]);
+        var saveDiv = $("<div>").addClass("col-1 saveBtn").append(saveIcon);
         // this creates the time block div order of the above div's
-        $timeBlock.append($timeDiv, $textBlock, $saveDiv);
-        $("#scheduler").append($timeBlock);
-        
+        timeBlock.append(timeDiv, textBlock, saveDiv);
+        $("#scheduler").append(timeBlock);
+
         i++;
-     
     }
     textAreaBGColour();
 }
@@ -59,55 +65,57 @@ function textAreaBGColour() {
 
     for (var i = 0; i < textValArray.length; i++) {
 
-            if (parseInt(textValArray[i]) === h) {
-                $("textarea[value=" + textValArray[i] + "]").addClass("present");
-            } else if (parseInt(textValArray[i]) > h) {
-                $("textarea[value=" + textValArray[i] + "]").addClass("future");
-            } else {
-                $("textarea[value=" + textValArray[i] + "]").addClass("past");
-            }
+        if (parseInt(textValArray[i]) === h) {
+            $("textarea[value=" + textValArray[i] + "]").addClass("present");
+        } else if (parseInt(textValArray[i]) > h) {
+            $("textarea[value=" + textValArray[i] + "]").addClass("future");
+        } else {
+            $("textarea[value=" + textValArray[i] + "]").addClass("past");
+        }
     }
 }
 
-// Set Get object from local storage
+// Array for storing objects in local storage
 var textStore = JSON.parse(localStorage.getItem("textStore")) || [];
 
-// Store text in local storage
+// Store & read text in/from local storage
 $(".fa-save").on("click", function (event) {
     event.preventDefault();
 
     var pageTime = $(this).attr("value");
-    var text = $(".text").val().trim();
+    var text = $(this).parent().prev("textarea").val();
+    var textareaVal = $(this).parent().prev("textarea").attr("value");
 
-    // Validates the text field for text and alerts if none is present
-    if ($(".text").val() == '') {
-        alert("No text detected, Please enter text.")
-        return;
-    } else {
-        textEntered = {
-            time: pageTime,
-            textInput: text
-        };
-        textStore.push(textEntered);
-        localStorage.setItem("textStore", JSON.stringify(textStore));
-    }
-});
+    textEntered = {
+        "time": pageTime,
+        "textInput": text
+    };
 
-// Get and display textarea from local storage
-function getStoredText() {
-
+    textStore.push(textEntered);
+    localStorage.setItem("textStore", JSON.stringify(textStore));
+    
     var storedText = localStorage.getItem("textStore");
     var text = JSON.parse(storedText);
 
-    var timeMatch = text.time;
-    var textSave = text.textInput;
+    $.each(text, function(index, val) {
+        console.log("val.time: ", val.time);
+        console.log("val.textInput: ", val.textInput);
 
-    if ($(".time-block").html() == timeMatch) {
-        $(".text").text(textSave);
-    } else {
-        $(".time-block").html();
-    }
-}
+        console.log("text index: ", index);
+
+        if (textareaVal == val.time) {
+
+            console.log("Yes");
+            $("textarea").val(val.textInput);
+            // $(this).parent().prev("textarea").val(val.textInput);
+            console.log($("textarea").attr(val.time));
+
+        } else {
+            console.log("nope!");
+        }
+    });   
+    
+});
 
 // Clear planner button
 function clearStorageButton() {
@@ -135,4 +143,44 @@ $("#submit").on("click", function (event) {
     window.location.reload();
 });
 
-getStoredText();
+
+
+// // Store text in local storage
+// $(".fa-save").on("click", function (event) {
+//     event.preventDefault();
+
+//     var pageTime = $(this).attr("value");
+
+//     var timeText = $(this).parent().prev("textarea").val();
+
+//     textEnteredArr[pageTime] = timeText;
+//     localStorage.setItem("textStore", JSON.stringify(textEnteredArr));
+
+//     getStoredText();
+// });
+
+// // Get and display textarea from local storage
+// function getStoredText() {
+
+//     var textStore = JSON.parse(localStorage.getItem("textStore"));
+
+//     console.log(textStore);
+
+//     $(textStore).each(function (index) {
+
+//         console.log(textStore[index]);
+
+//         if (textStore[index] !== null) {
+
+//             $("textarea").attr("value", textStore[index]).val();
+//             // console.log("not null");
+
+//             // var time = $(this).attr("value");
+//             // var text = $(this).parent().prev("textarea").val();
+
+
+
+//         }
+
+//     });
+// }
