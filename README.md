@@ -1,8 +1,8 @@
 # Work Day Planer
 Work Day Hourly Scheduler 
 
-*   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/dayPlanner)
-*   GitHub Pages URL [Coding Quiz Webpage](https://loosekonnection.github.io/dayPlanner/)
+*   GitHub Repository [Work Day Planner](https://github.com/Loosekonnection/dayPlanner)
+*   GitHub Pages URL [Work Day Planner Webpage](https://loosekonnection.github.io/dayPlanner/)
 ---
 
 <br>
