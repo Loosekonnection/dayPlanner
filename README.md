@@ -101,4 +101,4 @@ $("#17").text(storedKey17);
 <br>
 
 ---
-© 2021 Loosekonnection, Working towards being a Full Stack Developer, and feeling challange!
+© 2021 Loosekonnection, Working towards being a Full Stack Developer, and feeling challenged!
